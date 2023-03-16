@@ -34,4 +34,9 @@ if file is not None:
     st_folium(m, width = 1000)
 else:
     st.write("Please upload a file to begin clustering.")
+       
+if __name__ == "__main__":
+    # Run the app
+    app = st.cache(cluster_data)
+    app()
 
