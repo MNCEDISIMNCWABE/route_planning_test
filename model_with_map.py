@@ -18,7 +18,7 @@ def cluster_data(file, n_clusters, max_weight):
                                 size_max=max_weight,
                                 random_state=42,
                                 n_jobs=-1)
-    y_predicted = km_cons.fit_predict(data[['Delivery_lon', 'Delivery_lat']])
+    y_predicted = km_cons.fit_predict(data[['longitude', 'latitude']])
     
     # Add the cluster labels to the dataframe
     data['cluster'] = y_predicted + 1
@@ -28,7 +28,7 @@ def cluster_data(file, n_clusters, max_weight):
     colors *= n_clusters // len(colors) + 1
     
     # Create a folium map object centered on the mean of the delivery locations
-    m = folium.Map(location=[data['Delivery_lat'].mean(), data['Delivery_lon'].mean()], zoom_start=12)
+    m = folium.Map(location=[data['latitude'].mean(), data['longitude'].mean()], zoom_start=12)
     
     # Add cluster markers and lines to the map
     for i in range(1, n_clusters+1):
@@ -37,11 +37,11 @@ def cluster_data(file, n_clusters, max_weight):
         cluster_points = []
         for _, row in cluster_data.iterrows():
             # Add marker for each point
-            folium.Marker(location=[row['Delivery_lat'], row['Delivery_lon']],
+            folium.Marker(location=[row['latitude'], row['longitude']],
                           icon=folium.Icon(color=color),
                           popup=f"Cluster {i}").add_to(m)
             # Add point to list of cluster points
-            cluster_points.append([row['Delivery_lat'], row['Delivery_lon']])
+            cluster_points.append([row['latitude'], row['longitude']])
         # Add polyline connecting the cluster points
         folium.PolyLine(locations=cluster_points,
                         color=color).add_to(m)

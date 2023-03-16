@@ -14,11 +14,11 @@ from model_with_map import cluster_data
 st.title("Route Planning App")
 
 # Create a file uploader component in Streamlit
-file = st.file_uploader("Upload a CSV file with order addresses or geocoordinates")
+file = st.file_uploader("Upload a CSV file with latitude and longitude fields")
 
 # Accept user input for n_clusters and max_weight
-n_clusters = st.slider("Number of clusters", min_value=1, max_value=10000, value=50)
-max_weight = st.slider("Maximum stops per cluster", min_value=1, max_value=10000, value=28)
+n_clusters = st.slider("Number of clusters", min_value=1, max_value=1000, value=50)
+max_weight = st.slider("Maximum stops per cluster", min_value=1, max_value=1000, value=28)
 
 # If a file is uploaded, cluster the data and display the results
 if file is not None:
