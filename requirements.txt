@@ -1,5 +1,5 @@
 streamlit
 pandas
-from k_means_constrained import KMeansConstrained
+k_means_constrained
 folium
-from streamlit_folium import st_folium
+streamlit_folium
